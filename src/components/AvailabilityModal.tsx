@@ -54,7 +54,7 @@ export function AvailabilityModal({ employee, isOpen, onClose, onSave }: Availab
         </div>
 
         <div className="flex-1 overflow-auto p-6">
-          <div className="grid grid-cols-[80px_repeat(7,1fr)] gap-1">
+          <div className="grid grid-cols-[80px_repeat(7,1fr)] gap-1 min-w-[600px]">
             {/* Header Row */}
             <div className="font-medium text-stone-500 text-xs text-center p-2">Time</div>
             {DAYS.map(day => (

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Employee } from '../types';
 import { Button } from './ui/button';
-import { Plus, Trash2, Users, Settings, Clock } from 'lucide-react';
+import { Plus, Trash2, Users, Settings, Clock, X } from 'lucide-react';
 import { AvailabilityModal } from './AvailabilityModal';
 
 interface SidebarProps {
@@ -13,6 +13,7 @@ interface SidebarProps {
   setMaxCoverage: (val: number) => void;
   allowOvertime: boolean;
   setAllowOvertime: (val: boolean) => void;
+  onClose?: () => void;
 }
 
 export function Sidebar({ 
@@ -23,7 +24,8 @@ export function Sidebar({
   maxCoverage,
   setMaxCoverage,
   allowOvertime,
-  setAllowOvertime
+  setAllowOvertime,
+  onClose
 }: SidebarProps) {
   const [editingAvailabilityId, setEditingAvailabilityId] = useState<string | null>(null);
 
@@ -58,13 +60,20 @@ export function Sidebar({
   const DAYS_SHORT = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
   return (
-    <div className="w-80 bg-stone-50 border-r border-stone-200 h-screen flex flex-col overflow-hidden">
-      <div className="p-6 border-b border-stone-200">
-        <h1 className="text-xl font-bold text-stone-900 flex items-center gap-2">
-          <Users className="w-6 h-6 text-indigo-600" />
-          ShiftPlanner
-        </h1>
-        <p className="text-xs text-stone-500 mt-1">Weekly Shift Management</p>
+    <div className="w-80 bg-stone-50 border-r border-stone-200 h-screen flex flex-col overflow-hidden shadow-xl md:shadow-none">
+      <div className="p-6 border-b border-stone-200 flex items-center justify-between">
+        <div>
+          <h1 className="text-xl font-bold text-stone-900 flex items-center gap-2">
+            <Users className="w-6 h-6 text-indigo-600" />
+            ShiftPlanner
+          </h1>
+          <p className="text-xs text-stone-500 mt-1">Weekly Shift Management</p>
+        </div>
+        {onClose && (
+          <button onClick={onClose} className="md:hidden text-stone-400 hover:text-stone-600">
+            <X className="w-5 h-5" />
+          </button>
+        )}
       </div>
 
       <div className="flex-1 overflow-y-auto p-6 space-y-8">
