@@ -52,7 +52,7 @@ export function StatsPanel({ schedule, employees }: StatsPanelProps) {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <Card className="col-span-1 lg:col-span-2">
         <CardHeader>
-          <CardTitle>Weekly Hours Distribution</CardTitle>
+          <CardTitle>Distribuzione Ore Settimanali</CardTitle>
         </CardHeader>
         <CardContent className="h-[300px]">
           <ResponsiveContainer width="100%" height="100%">
@@ -75,7 +75,7 @@ export function StatsPanel({ schedule, employees }: StatsPanelProps) {
 
       <Card>
         <CardHeader>
-          <CardTitle>Shift Types Equity</CardTitle>
+          <CardTitle>Equità Tipi di Turno</CardTitle>
         </CardHeader>
         <CardContent className="h-[300px]">
           <ResponsiveContainer width="100%" height="100%">
@@ -85,9 +85,9 @@ export function StatsPanel({ schedule, employees }: StatsPanelProps) {
               <YAxis dataKey="name" type="category" width={100} tick={{fontSize: 11}} />
               <Tooltip />
               <Legend />
-              <Bar dataKey="Morning" stackId="a" fill="#f59e0b" />
-              <Bar dataKey="Intermediate" stackId="a" fill="#3b82f6" />
-              <Bar dataKey="Evening" stackId="a" fill="#6366f1" />
+              <Bar dataKey="Morning" name="Mattina" stackId="a" fill="#f59e0b" />
+              <Bar dataKey="Intermediate" name="Intermedio" stackId="a" fill="#3b82f6" />
+              <Bar dataKey="Evening" name="Sera" stackId="a" fill="#6366f1" />
             </BarChart>
           </ResponsiveContainer>
         </CardContent>
@@ -95,7 +95,7 @@ export function StatsPanel({ schedule, employees }: StatsPanelProps) {
 
       <Card>
         <CardHeader>
-          <CardTitle>Daily Coverage Analysis</CardTitle>
+          <CardTitle>Analisi Copertura Giornaliera</CardTitle>
         </CardHeader>
         <CardContent className="h-[300px]">
           <ResponsiveContainer width="100%" height="100%">
@@ -105,8 +105,8 @@ export function StatsPanel({ schedule, employees }: StatsPanelProps) {
               <YAxis domain={[0, 'auto']} />
               <Tooltip />
               <Legend />
-              <Bar dataKey="min" fill="#ef4444" name="Min Staff" />
-              <Bar dataKey="avg" fill="#10b981" name="Avg Staff" />
+              <Bar dataKey="min" fill="#ef4444" name="Staff Min" />
+              <Bar dataKey="avg" fill="#10b981" name="Staff Medio" />
             </BarChart>
           </ResponsiveContainer>
         </CardContent>

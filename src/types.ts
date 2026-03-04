@@ -29,9 +29,10 @@ export interface SolverSettings {
   shiftDurationHours: number; // 4
 }
 
-export const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+export const DAYS = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica'];
 export const SLOTS_PER_HOUR = 1;
-export const START_HOUR = 10;
+export const START_HOUR = 9;
 export const END_HOUR = 22;
-export const TOTAL_SLOTS = (END_HOUR - START_HOUR) * SLOTS_PER_HOUR; // 12 slots
+export const TOTAL_SLOTS = (END_HOUR - START_HOUR) * SLOTS_PER_HOUR; // 13 slots
 export const SHIFT_LENGTH_SLOTS = 4 * SLOTS_PER_HOUR; // 4 slots
+export const MIN_SHIFT_LENGTH_SLOTS = 2 * SLOTS_PER_HOUR; // 2 slots

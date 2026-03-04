@@ -19,7 +19,7 @@ export function ShiftCalendar({ schedule, employees }: ShiftCalendarProps) {
         {/* Header Row */}
         <div className="grid grid-cols-[100px_repeat(7,1fr)] border-b border-stone-200 bg-stone-50">
           <div className="p-4 font-semibold text-stone-500 text-sm flex items-center justify-center border-r border-stone-200">
-            Time
+            Orario
           </div>
           {DAYS.map(day => (
             <div key={day} className="p-4 font-semibold text-stone-900 text-sm text-center border-r border-stone-200 last:border-r-0">
@@ -33,8 +33,8 @@ export function ShiftCalendar({ schedule, employees }: ShiftCalendarProps) {
           {hours.map((hour) => (
             <div key={hour} className="grid grid-cols-[100px_repeat(7,1fr)] group hover:bg-stone-50/50 transition-colors">
               {/* Time Column */}
-              <div className="p-3 text-xs font-mono text-stone-500 border-r border-stone-200 flex items-center justify-between bg-stone-50/30">
-                <span>{hour}:00</span>
+              <div className="p-3 text-[10px] font-mono text-stone-500 border-r border-stone-200 flex items-center justify-center bg-stone-50/30 text-center leading-tight">
+                <span>{hour.toString().padStart(2, '0')}:00 - {(hour + 1).toString().padStart(2, '0')}:00</span>
               </div>
 
               {/* Days Columns */}

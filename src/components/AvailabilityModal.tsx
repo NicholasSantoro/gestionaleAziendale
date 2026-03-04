@@ -46,7 +46,7 @@ export function AvailabilityModal({ employee, isOpen, onClose, onSave }: Availab
       <div className="bg-white rounded-xl shadow-xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden">
         <div className="p-4 border-b border-stone-200 flex items-center justify-between bg-stone-50">
           <h2 className="text-lg font-semibold text-stone-900">
-            Manage Availability: <span className="text-indigo-600">{employee.name}</span>
+            Gestisci Disponibilità: <span className="text-indigo-600">{employee.name}</span>
           </h2>
           <button onClick={onClose} className="text-stone-400 hover:text-stone-600">
             <X className="w-5 h-5" />
@@ -54,20 +54,39 @@ export function AvailabilityModal({ employee, isOpen, onClose, onSave }: Availab
         </div>
 
         <div className="flex-1 overflow-auto p-6">
-          <div className="grid grid-cols-[80px_repeat(7,1fr)] gap-1 min-w-[600px]">
+          <div className="grid grid-cols-[100px_repeat(7,1fr)] gap-1 min-w-[600px]">
             {/* Header Row */}
-            <div className="font-medium text-stone-500 text-xs text-center p-2">Time</div>
-            {DAYS.map(day => (
-              <div key={day} className="font-medium text-stone-900 text-xs text-center p-2 bg-stone-100 rounded">
-                {day.slice(0, 3)}
-              </div>
-            ))}
+            <div className="font-medium text-stone-500 text-xs text-center p-2 flex items-center justify-center">Orario</div>
+            {DAYS.map((day, dayIdx) => {
+              const allSlots = hours.map((_, i) => i);
+              const currentSlots = localSlots[dayIdx] || [];
+              const isAllBusy = currentSlots.length === hours.length;
+              
+              return (
+                <div key={day} className="flex flex-col gap-1 p-1 bg-stone-100 rounded">
+                  <div className="font-medium text-stone-900 text-xs text-center">
+                    {day.slice(0, 3)}
+                  </div>
+                  <button
+                    onClick={() => {
+                      setLocalSlots(prev => ({
+                        ...prev,
+                        [dayIdx]: isAllBusy ? [] : allSlots
+                      }));
+                    }}
+                    className="text-[9px] py-0.5 px-1 rounded bg-stone-200 hover:bg-stone-300 text-stone-600 font-medium transition-colors"
+                  >
+                    {isAllBusy ? "Libera" : "Occupa"}
+                  </button>
+                </div>
+              );
+            })}
 
             {/* Time Rows */}
             {hours.map((hour, slotIdx) => (
               <React.Fragment key={hour}>
-                <div className="text-xs font-mono text-stone-500 flex items-center justify-center bg-stone-50 rounded">
-                  {hour}:00
+                <div className="text-[10px] font-mono text-stone-500 flex items-center justify-center bg-stone-50 rounded px-1 text-center leading-tight">
+                  {hour.toString().padStart(2, '0')}:00 - {(hour + 1).toString().padStart(2, '0')}:00
                 </div>
                 {DAYS.map((_, dayIdx) => {
                   const isUnavailable = (localSlots[dayIdx] || []).includes(slotIdx);
@@ -82,7 +101,7 @@ export function AvailabilityModal({ employee, isOpen, onClose, onSave }: Availab
                           : "bg-white border-stone-100 hover:bg-stone-50 text-stone-400"
                       )}
                     >
-                      {isUnavailable ? "Busy" : "Free"}
+                      {isUnavailable ? "Occupato" : "Libero"}
                     </button>
                   );
                 })}
@@ -91,13 +110,13 @@ export function AvailabilityModal({ employee, isOpen, onClose, onSave }: Availab
           </div>
           
           <div className="mt-4 text-xs text-stone-500">
-            * Click on slots to mark them as unavailable (Red = Busy).
+            * Clicca sugli slot per segnarli come non disponibili (Rosso = Occupato).
           </div>
         </div>
 
         <div className="p-4 border-t border-stone-200 bg-stone-50 flex justify-end gap-2">
-          <Button variant="outline" onClick={onClose}>Cancel</Button>
-          <Button onClick={handleSave}>Save Changes</Button>
+          <Button variant="outline" onClick={onClose}>Annulla</Button>
+          <Button onClick={handleSave}>Salva Modifiche</Button>
         </div>
       </div>
     </div>
